@@ -3,6 +3,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/main.dart';
 
+import 'addTask/newTask.dart';
+import 'detailTask/detailTask.dart';
+import 'home/myHomePage.dart';
+
 part 'app_router.gr.dart';
 
 @MaterialAutoRouter(
