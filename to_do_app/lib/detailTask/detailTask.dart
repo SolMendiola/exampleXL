@@ -23,10 +23,16 @@ class DetailOfTask extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Text(''),
+            Text('Not done', style: TextStyle(color: Colors.pinkAccent)),
             Text('Two-line item',
                 style: TextStyle(color: Colors.black, fontSize: 34)),
-            Text('Recently i came across an ....')
+            Text('Recently i came across an ....'),
+            TextButton(onPressed: null,
+                child: Text(
+                'MARK AS DONE',
+                  style: TextStyle(color:Colors.pinkAccent),
+
+                ))
           ],
         ),
       ),
