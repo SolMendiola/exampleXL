@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'addTask/formToAddNewTask.dart';
 import 'app_router.dart';
-import 'cardToDo.dart';
+import 'domain/cardToDo.dart';
 
 void main() {
   runApp(MyApp());

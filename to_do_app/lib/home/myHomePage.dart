@@ -1,10 +1,9 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../app_router.dart';
-import '../cardToDo.dart';
+import '../domain/cardToDo.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, this.title = 'Test'});
@@ -14,7 +13,6 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-
 
 class _MyHomePageState extends State<MyHomePage> {
   final _biggerFont = const TextStyle(fontSize: 18);
@@ -26,11 +24,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
           title: Row(
-            children: [
-              Expanded(child: Text(widget.title, textAlign: TextAlign.center)),
-              IconButton(onPressed: _addElement, icon: const Icon(Icons.add))
-            ],
-          )),
+        children: [
+          Expanded(child: Text(widget.title, textAlign: TextAlign.center)),
+          IconButton(onPressed: _addElement, icon: const Icon(Icons.add))
+        ],
+      )),
       body: ListView.separated(
         padding: const EdgeInsets.all(16.0),
         itemCount: 2,
@@ -53,9 +51,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               subtitle: Text(_elements[index].description),
               trailing: Checkbox(
-                checkColor: Colors.red,
+                checkColor: Colors.white,
                 value: _elements[index].done,
-                onChanged: (_) {},
+                onChanged: (checked) {
+                  setState(() {
+                    _elements[index].done = checked ?? false;
+                  });
+                },
               ),
             ),
           );
@@ -67,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-
   void _addElement() {
     context.router.navigate(NewTaskScreenRoute());
   }
@@ -75,5 +76,4 @@ class _MyHomePageState extends State<MyHomePage> {
   void _viewDetail() {
     context.router.navigate(DetailOfTaskRoute());
   }
-
 }
