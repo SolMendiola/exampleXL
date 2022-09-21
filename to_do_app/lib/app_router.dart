@@ -10,6 +10,7 @@ part 'app_router.gr.dart';
   routes: <AutoRoute>[
     AutoRoute(page: MyHomePage, initial: true),
     AutoRoute(page: NewTaskScreen, initial: false),
+    AutoRoute(page: DetailOfTask, initial: false),
   ],
 )
 // extend the generated private router

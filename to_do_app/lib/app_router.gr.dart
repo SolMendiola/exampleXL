@@ -34,6 +34,12 @@ class _$AppRouter extends RootStackRouter {
         child: NewTaskScreen(),
       );
     },
+    DetailOfTaskRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const DetailOfTask(),
+      );
+    },
   };
 
   @override
@@ -45,6 +51,10 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           NewTaskScreenRoute.name,
           path: '/new-task-screen',
+        ),
+        RouteConfig(
+          DetailOfTaskRoute.name,
+          path: '/detail-of-task',
         ),
       ];
 }
@@ -93,4 +103,16 @@ class NewTaskScreenRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'NewTaskScreenRoute';
+}
+
+/// generated route for
+/// [DetailOfTask]
+class DetailOfTaskRoute extends PageRouteInfo<void> {
+  const DetailOfTaskRoute()
+      : super(
+          DetailOfTaskRoute.name,
+          path: '/detail-of-task',
+        );
+
+  static const String name = 'DetailOfTaskRoute';
 }

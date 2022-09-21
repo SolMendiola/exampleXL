@@ -54,7 +54,7 @@ class NewTaskScreen extends StatelessWidget {
                 child: Text('Cancel', style: TextStyle(color: Colors.white)))),
         body: Container(
           padding: const EdgeInsets.all(20.0),
-          child: fdd(),
+          child: FormToAddNewTask(),
         ),
       );
 }
@@ -69,11 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
           title: Row(
-        children: [
-          Expanded(child: Text(widget.title, textAlign: TextAlign.center)),
-          IconButton(onPressed: _addElement, icon: const Icon(Icons.add))
-        ],
-      )),
+            children: [
+              Expanded(child: Text(widget.title, textAlign: TextAlign.center)),
+              IconButton(onPressed: _addElement, icon: const Icon(Icons.add))
+            ],
+          )),
       body: ListView.separated(
         padding: const EdgeInsets.all(16.0),
         itemCount: 2,
@@ -81,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
           final index = i ~/ 2;
           if (index >= _elements.length) {
             var list = <String>[];
+            list.add('hola');
             _elements.addAll(list);
           }
 
@@ -124,39 +125,43 @@ class _MyHomePageState extends State<MyHomePage> {
   void _saveElement() {}
 
   void _viewDetail() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (context) {
-          return Scaffold(
-            appBar: AppBar(
-                title: Text('Detail', textAlign: TextAlign.center),
-                leading: TextButton(
-                    onPressed: Navigator.of(context).pop,
-                    child:
-                        Text('Todos', style: TextStyle(color: Colors.white)))),
-            body: Container(
-              width: 375,
-              height: 262,
-              decoration: BoxDecoration(color: Colors.white),
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  Text(''),
-                  Text('Two-line item',
-                      style: TextStyle(color: Colors.black, fontSize: 34)),
-                  Text('Recently i came across an ....')
-                ],
-              ),
-            ),
-          );
-        },
+    context.router.navigate(DetailOfTaskRoute());
+  }
+}
+class DetailOfTask extends StatelessWidget {
+  const DetailOfTask({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Text('Detail', textAlign: TextAlign.center),
+          leading: TextButton(
+              onPressed: Navigator.of(context).pop,
+              child:
+                  Text('Todos', style: TextStyle(color: Colors.white)))),
+      body: Container(
+        width: 375,
+        height: 262,
+        decoration: BoxDecoration(color: Colors.white),
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Text(''),
+            Text('Two-line item',
+                style: TextStyle(color: Colors.black, fontSize: 34)),
+            Text('Recently i came across an ....')
+          ],
+        ),
       ),
     );
   }
 }
 
-class fdd extends StatelessWidget {
-  const fdd({
+class FormToAddNewTask extends StatelessWidget {
+  const FormToAddNewTask({
     Key? key,
   }) : super(key: key);
 
