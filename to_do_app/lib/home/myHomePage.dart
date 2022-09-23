@@ -16,8 +16,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _elements = <CardToDo>[];
-  final _saved = <CardToDo>{};
+  final List<CardToDo> _elements = [];
 
   @override
   Widget build(BuildContext context) {
@@ -30,43 +29,32 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       )),
       body: ListView.separated(
-            padding: const EdgeInsets.all(16.0),
-            itemCount: 2,
-            itemBuilder: (context, i) {
-              final index = i ~/ 2;
-              if (index >= _elements.length) {
-                var list = <CardToDo>[];
-                list.add(
-                    CardToDo(title: 'hola', description: 'fff', done: false));
-                _elements.addAll(list);
-              }
+        padding: const EdgeInsets.all(16.0),
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          if (index >= _elements.length) {
+            _elements
+                .add(CardToDo(title: 'hola', description: 'fff', done: false));
+          }
 
-              final alreadySaved = _saved.contains(_elements[index]);
-
-              return ListItem(
-                  element: _elements[index],
-                  onChanged: (done) => onChanged(index, done ?? false),
-                  viewDetail: viewDetail);
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider(color: Colors.pinkAccent);
-            },
-          ),
-      
+          var element = _elements[index];
+          return ListItem(
+              element: element,
+              onChanged: (done) => onChanged(index, done ?? false),
+              viewDetail: viewDetail);
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider(color: Colors.pinkAccent);
+        },
+      ),
     );
   }
 
-  void onChanged(int index, bool done) {
-    setState(() {
+  void onChanged(int index, bool done) => setState(() {
       _elements[index].done = done;
     });
-  }
 
-  void _addElement() {
-    context.router.navigate(NewTaskScreenRoute());
-  }
+  void _addElement() => context.router.navigate(NewTaskScreenRoute());
 
-  void viewDetail() {
-    context.router.navigate(DetailOfTaskRoute());
-  }
+  void viewDetail() => context.router.navigate(DetailOfTaskRoute());
 }

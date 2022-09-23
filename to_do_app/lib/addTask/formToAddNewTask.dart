@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +7,7 @@ class FormToAddNewTask extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Column(
       children: [
         TextFormField(
           decoration: const InputDecoration(
@@ -20,11 +18,11 @@ class FormToAddNewTask extends StatelessWidget {
         TextFormField(
           maxLines: 5,
           decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Task description',
-              labelStyle: TextStyle(fontSize: 20)),
+            border: UnderlineInputBorder(),
+            labelText: 'Task description',
+            labelStyle: TextStyle(fontSize: 20),
+          ),
         ),
       ],
     );
-  }
 }
