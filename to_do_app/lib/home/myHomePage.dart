@@ -51,8 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onChanged(int index, bool done) => setState(() {
-      // _elements[index].done = done;
-    });
+        // TODO: implement update task
+      });
 
   void _addElement() => context.router.navigate(NewTaskScreenRoute());
 
