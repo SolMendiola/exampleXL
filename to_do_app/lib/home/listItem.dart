@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_app/domain/cardToDo.dart';
+import 'package:to_do_app/domain/card_to_do.dart';
 
 class ListItem extends StatelessWidget {
   final _biggerFont = const TextStyle(fontSize: 18);
