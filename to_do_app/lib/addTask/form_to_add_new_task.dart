@@ -5,15 +5,13 @@ class FormToAddNewTask extends StatelessWidget {
     Key? key,
     required this.titleController,
     required this.descriptionController,
-
   }) : super(key: key);
 
   final TextEditingController titleController;
   final TextEditingController descriptionController;
 
   @override
-  Widget build(BuildContext context) {
-    return Form(
+  Widget build(BuildContext context) => Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -22,12 +20,10 @@ class FormToAddNewTask extends StatelessWidget {
               border: UnderlineInputBorder(),
               hintText: 'Task title',
             ),
-            // The validator receives the text that the user has entered.
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
+              return (value == null || value.isEmpty)
+                  ? 'Please enter some text'
+                  : null;
             },
             controller: titleController,
           ),
@@ -37,17 +33,14 @@ class FormToAddNewTask extends StatelessWidget {
               hintText: 'Task description',
               labelStyle: TextStyle(fontSize: 20),
             ),
-            // The validator receives the text that the user has entered.
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
+              return (value == null || value.isEmpty)
+                  ? 'Please enter some text'
+                  : null;
             },
             controller: descriptionController,
           ),
         ],
       ),
-    );
-  }
+  );
 }

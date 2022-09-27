@@ -6,19 +6,16 @@ import 'package:to_do_app/domain/card_to_do.dart';
 import '../repository/repository_task.dart';
 
 class DetailOfTask extends StatelessWidget {
+
+  final CardToDo element;
   DetailOfTask({
     Key? key,
-    required this.index,
+    required this.element,
   }) : super(key: key);
-
-  final int index;
-  final repository = RepositoryTask();
 
   @override
   Widget build(BuildContext context) {
-    final elements = repository.getTasks();
 
-    var element = elements[index];
     return Scaffold(
       appBar: AppBar(
           title: Text('Detail', textAlign: TextAlign.center),

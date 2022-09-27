@@ -42,7 +42,7 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: DetailOfTask(
           key: args.key,
-          index: args.index,
+          element: args.element,
         ),
       );
     },
@@ -116,13 +116,13 @@ class NewTaskScreenRoute extends PageRouteInfo<void> {
 class DetailOfTaskRoute extends PageRouteInfo<DetailOfTaskRouteArgs> {
   DetailOfTaskRoute({
     Key? key,
-    required int index,
+    required CardToDo element,
   }) : super(
           DetailOfTaskRoute.name,
           path: '/detail-of-task',
           args: DetailOfTaskRouteArgs(
             key: key,
-            index: index,
+            element: element,
           ),
         );
 
@@ -132,15 +132,15 @@ class DetailOfTaskRoute extends PageRouteInfo<DetailOfTaskRouteArgs> {
 class DetailOfTaskRouteArgs {
   const DetailOfTaskRouteArgs({
     this.key,
-    required this.index,
+    required this.element,
   });
 
   final Key? key;
 
-  final int index;
+  final CardToDo element;
 
   @override
   String toString() {
-    return 'DetailOfTaskRouteArgs{key: $key, index: $index}';
+    return 'DetailOfTaskRouteArgs{key: $key, element: $element}';
   }
 }

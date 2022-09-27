@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:to_do_app/domain/card_to_do.dart';
 
 import '../repository/repository_task.dart';
-import 'formToAddNewTask.dart';
+import 'form_to_add_new_task.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({Key? key}) : super(key: key);
@@ -27,15 +27,17 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-            title: Text('New Task', textAlign: TextAlign.center),
-            actions: [
-              TextButton(
-                  onPressed: () => saveTask(context),
-                  child: Text('Save', style: TextStyle(color: Colors.white)))
-            ],
-            leading: TextButton(
-                onPressed: Navigator.of(context).pop,
-                child: Text('Cancel', style: TextStyle(color: Colors.white)))),
+          title: const Text('New Task', textAlign: TextAlign.center),
+          actions: [
+            TextButton(
+                onPressed: () => saveTask(context),
+                child: Text('Save', style: TextStyle(color: Colors.white)))
+          ],
+          leading: TextButton(
+            onPressed: context.router.pop,
+            child: Text('Cancel', style: TextStyle(color: Colors.white)),
+          ),
+        ),
         body: Container(
           padding: const EdgeInsets.all(20.0),
           child: FormToAddNewTask(
@@ -45,7 +47,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
         ),
       );
 
-  saveTask(BuildContext context) {
+  void saveTask(BuildContext context) {
     var titleTask = titleController.text;
     var descriptionTask = descriptionController.text;
     var isDone = false;
