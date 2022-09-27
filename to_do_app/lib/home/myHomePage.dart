@@ -22,7 +22,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     _elements = repository.getTasks();
     super.initState();
   }
