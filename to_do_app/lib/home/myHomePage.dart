@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:to_do_app/home/listItem.dart';
 
 import '../app_router.dart';
-import '../domain/cardToDo.dart';
+import '../domain/card_to_do.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, this.title = 'Test'});
@@ -51,8 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onChanged(int index, bool done) => setState(() {
-      _elements[index].done = done;
-    });
+        // TODO: implement update task
+      });
 
   void _addElement() => context.router.navigate(NewTaskScreenRoute());
 
