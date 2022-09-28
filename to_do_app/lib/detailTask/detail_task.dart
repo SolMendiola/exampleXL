@@ -31,7 +31,6 @@ class DetailOfTask extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
-//        height: 262,
         decoration: BoxDecoration(color: Colors.white),
         padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20, bottom: 20),
         child: Column(
@@ -47,10 +46,8 @@ class DetailOfTask extends StatelessWidget {
             if (!element.done)
               Padding(
                 padding: const EdgeInsets.only(top: 18),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                child: Center(
+                    child:
                       TextButton(
                         onPressed: null,
                         child: Text(
@@ -58,7 +55,7 @@ class DetailOfTask extends StatelessWidget {
                           style: TextStyle(color: Colors.pinkAccent),
                         ),
                       ),
-                    ]),
+                    ),
               ),
           ],
         ),
