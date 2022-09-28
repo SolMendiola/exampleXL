@@ -18,16 +18,26 @@ class DetailOfTask extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: Text('Detail', textAlign: TextAlign.center),
-          leading: TextButton(
-              onPressed: context.router.pop,
-              child: Text('Todos', style: TextStyle(color: Colors.white)))),
+        centerTitle: true,
+        title: Text('Details', textAlign: TextAlign.center),
+        leadingWidth: 100,
+        leading: TextButton(
+          onPressed: context.router.pop,
+          child: Row(children: [
+            Icon(Icons.arrow_back_ios, color: Colors.white),
+            Text('Todos', style: TextStyle(fontSize: 17, color: Colors.white)),
+          ]),
+        ),
+      ),
       body: Container(
-        width: 375,
-        height: 262,
+        width: double.infinity,
+//        height: 262,
         decoration: BoxDecoration(color: Colors.white),
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20, bottom: 20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(element.done ? 'Done' : 'Not done',
                 style: TextStyle(color: Colors.pinkAccent)),
@@ -35,12 +45,21 @@ class DetailOfTask extends StatelessWidget {
                 style: TextStyle(color: Colors.black, fontSize: 34)),
             Text(element.description),
             if (!element.done)
-              TextButton(
-                  onPressed: null,
-                  child: Text(
-                    'MARK AS DONE',
-                    style: TextStyle(color: Colors.pinkAccent),
-                  ))
+              Padding(
+                padding: const EdgeInsets.only(top: 18),
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: null,
+                        child: Text(
+                          'MARK AS DONE',
+                          style: TextStyle(color: Colors.pinkAccent),
+                        ),
+                      ),
+                    ]),
+              ),
           ],
         ),
       ),
