@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_app/addTask/add_task_cubit.dart';
 import '../common/string_extension.dart';
 
 class FormToAddNewTask extends StatelessWidget {
@@ -13,7 +15,9 @@ class FormToAddNewTask extends StatelessWidget {
   final TextEditingController descriptionController;
 
   @override
-  Widget build(BuildContext context) => Form(
+  Widget build(BuildContext context) {
+    final cubit = context.read<AddTaskCubit>();
+    return Form(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,6 +35,7 @@ class FormToAddNewTask extends StatelessWidget {
                   ? 'Please enter some text'
                   : null,
             controller: titleController,
+            onChanged: cubit.changeTitle,
           ),
           TextFormField(
             minLines: 4,
@@ -46,8 +51,11 @@ class FormToAddNewTask extends StatelessWidget {
                   ? 'Please enter some text'
                   : null,
             controller: descriptionController,
+            onChanged: cubit.changeDescription,
           ),
         ],
       ),
   );
+  }
+
 }
