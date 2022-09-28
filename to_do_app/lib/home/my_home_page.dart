@@ -19,11 +19,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final repository = RepositoryTask();
   late var _elements;
-  final _saved = <CardToDo>{};
 
   @override
   void initState() {
-    // TODO: implement initState
     _elements = repository.getTasks();
     super.initState();
   }
@@ -48,7 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(16.0),
               itemCount: _elements.length,
               itemBuilder: (context, index) {
-                final alreadySaved = _saved.contains(_elements[index]);
 
                 return ListItem(
                     element: _elements[index],

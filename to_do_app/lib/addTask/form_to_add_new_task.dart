@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../common/string_extension.dart';
 
 class FormToAddNewTask extends StatelessWidget {
   FormToAddNewTask({
@@ -20,11 +21,9 @@ class FormToAddNewTask extends StatelessWidget {
               border: UnderlineInputBorder(),
               hintText: 'Task title',
             ),
-            validator: (value) {
-              return (value == null || value.isEmpty)
+            validator: (value) => (value.isEmpty)
                   ? 'Please enter some text'
-                  : null;
-            },
+                  : null,
             controller: titleController,
           ),
           TextFormField(
@@ -33,11 +32,9 @@ class FormToAddNewTask extends StatelessWidget {
               hintText: 'Task description',
               labelStyle: TextStyle(fontSize: 20),
             ),
-            validator: (value) {
-              return (value == null || value.isEmpty)
+            validator: (value) => (value.isEmpty)
                   ? 'Please enter some text'
-                  : null;
-            },
+                  : null,
             controller: descriptionController,
           ),
         ],
