@@ -26,18 +26,24 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           title: args.title,
         ),
+        maintainState: false,
       );
     },
     NewTaskScreenRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: NewTaskScreen(),
+        child: const NewTaskScreen(),
+        maintainState: false,
       );
     },
     DetailOfTaskRoute.name: (routeData) {
+      final args = routeData.argsAs<DetailOfTaskRouteArgs>();
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const DetailOfTask(),
+        child: DetailOfTask(
+          key: args.key,
+          element: args.element,
+        ),
       );
     },
   };
@@ -107,12 +113,34 @@ class NewTaskScreenRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [DetailOfTask]
-class DetailOfTaskRoute extends PageRouteInfo<void> {
-  const DetailOfTaskRoute()
-      : super(
+class DetailOfTaskRoute extends PageRouteInfo<DetailOfTaskRouteArgs> {
+  DetailOfTaskRoute({
+    Key? key,
+    required CardToDo element,
+  }) : super(
           DetailOfTaskRoute.name,
           path: '/detail-of-task',
+          args: DetailOfTaskRouteArgs(
+            key: key,
+            element: element,
+          ),
         );
 
   static const String name = 'DetailOfTaskRoute';
+}
+
+class DetailOfTaskRouteArgs {
+  const DetailOfTaskRouteArgs({
+    this.key,
+    required this.element,
+  });
+
+  final Key? key;
+
+  final CardToDo element;
+
+  @override
+  String toString() {
+    return 'DetailOfTaskRouteArgs{key: $key, element: $element}';
+  }
 }
