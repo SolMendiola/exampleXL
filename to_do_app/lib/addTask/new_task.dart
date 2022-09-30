@@ -34,7 +34,6 @@ class _NewTaskContentState extends State<NewTaskContent> {
 
   @override
   void initState() {
-    // TODO: implement initState
     cubit = context.read<AddTaskCubit>();
     titleController.text = cubit.state.task.title;
     descriptionController.text = cubit.state.task.description;

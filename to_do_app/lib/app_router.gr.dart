@@ -18,15 +18,9 @@ class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     MyHomePageRoute.name: (routeData) {
-      final args = routeData.argsAs<MyHomePageRouteArgs>(
-          orElse: () => const MyHomePageRouteArgs());
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: MyHomePage(
-          key: args.key,
-          title: args.title,
-        ),
-        maintainState: false,
+        child: MyHomePage(),
       );
     },
     NewTaskScreenRoute.name: (routeData) {
@@ -42,7 +36,7 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: DetailOfTask(
           key: args.key,
-          element: args.element,
+          index: args.index,
         ),
       );
     },
@@ -67,36 +61,14 @@ class _$AppRouter extends RootStackRouter {
 
 /// generated route for
 /// [MyHomePage]
-class MyHomePageRoute extends PageRouteInfo<MyHomePageRouteArgs> {
-  MyHomePageRoute({
-    Key? key,
-    String title = 'Test',
-  }) : super(
+class MyHomePageRoute extends PageRouteInfo<void> {
+  const MyHomePageRoute()
+      : super(
           MyHomePageRoute.name,
           path: '/',
-          args: MyHomePageRouteArgs(
-            key: key,
-            title: title,
-          ),
         );
 
   static const String name = 'MyHomePageRoute';
-}
-
-class MyHomePageRouteArgs {
-  const MyHomePageRouteArgs({
-    this.key,
-    this.title = 'Test',
-  });
-
-  final Key? key;
-
-  final String title;
-
-  @override
-  String toString() {
-    return 'MyHomePageRouteArgs{key: $key, title: $title}';
-  }
 }
 
 /// generated route for
@@ -116,13 +88,13 @@ class NewTaskScreenRoute extends PageRouteInfo<void> {
 class DetailOfTaskRoute extends PageRouteInfo<DetailOfTaskRouteArgs> {
   DetailOfTaskRoute({
     Key? key,
-    required CardToDo element,
+    required int index,
   }) : super(
           DetailOfTaskRoute.name,
           path: '/detail-of-task',
           args: DetailOfTaskRouteArgs(
             key: key,
-            element: element,
+            index: index,
           ),
         );
 
@@ -132,15 +104,15 @@ class DetailOfTaskRoute extends PageRouteInfo<DetailOfTaskRouteArgs> {
 class DetailOfTaskRouteArgs {
   const DetailOfTaskRouteArgs({
     this.key,
-    required this.element,
+    required this.index,
   });
 
   final Key? key;
 
-  final CardToDo element;
+  final int index;
 
   @override
   String toString() {
-    return 'DetailOfTaskRouteArgs{key: $key, element: $element}';
+    return 'DetailOfTaskRouteArgs{key: $key, index: $index}';
   }
 }
