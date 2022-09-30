@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../domain/card_to_do.dart';
 
 class RepositoryTask {
@@ -5,15 +7,25 @@ class RepositoryTask {
 
   static final RepositoryTask _instance = RepositoryTask._privateConstructor();
 
-  factory RepositoryTask() {
+   factory RepositoryTask() {
     return _instance;
   }
 
+  final _streamController = StreamController<List<CardToDo>>.broadcast();
+
   final List<CardToDo> _elements = [];
 
-  void saveTask(CardToDo taskToAdd) => _elements.add(taskToAdd);
+  void saveTask(CardToDo taskToAdd) {
+    _elements.add(taskToAdd);
+    _streamController.add(_elements);
+  }
 
-  void removeTask(CardToDo task) => _elements.remove(task);
+  void removeTask(CardToDo task) {
+    _elements.remove(task);
+    _streamController.add(_elements);
+  }
+
+  Stream<List<CardToDo>> getTaskStream() => _streamController.stream;
 
   List<CardToDo> getTasks() => _elements;
 
