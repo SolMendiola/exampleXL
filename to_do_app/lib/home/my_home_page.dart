@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:to_do_app/addTask/task_state.dart';
 import 'package:to_do_app/home/home_cubit.dart';
 import 'package:to_do_app/home/home_state.dart';
 import 'package:to_do_app/home/list_item.dart';
+import 'package:to_do_app/home/progress_widget.dart';
 
 import '../app_router.dart';
 import '../domain/card_to_do.dart';
@@ -40,38 +43,45 @@ class _HomeContent extends StatelessWidget {
               icon: const Icon(Icons.add))
         ],
       ),
-      body: Column(
-        children: [
-          BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-            return ListView.separated(
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(16.0),
-              itemCount: state.tasks.length,
-              itemBuilder: (context, index) {
-                return ListItem(
-                    element: state.tasks[index],
-                    onChanged: (done) =>
-                        cubit.onChanged(index, done ?? false),
-                    viewDetail: () =>
-                        viewDetail(context, index));
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const Divider(color: Colors.pinkAccent);
-              },
+      body: SafeArea(
+        child: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                ListView.separated(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(16.0),
+                  itemCount: state.tasks.length,
+                  itemBuilder: (context, index) {
+                    return ListItem(
+                        element: state.tasks[index],
+                        onChanged: (done) =>
+                            cubit.onChanged(index, done ?? false),
+                        viewDetail: () => viewDetail(context, index));
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider(color: Colors.pinkAccent);
+                  },
+                ),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    padding: EdgeInsets.all(10),
+                    child: TextButton(
+                      onPressed: () => cubit.clearAllDone(),
+                      child: Text('CLEAR ALL DONE',
+                          style: TextStyle(color: Colors.pinkAccent)),
+                    ),
+                  ),
+                ),
+                ProgressWidget(
+                    totalValue: max(state.tasks.length,1),
+                    currentValue:
+                        state.tasks.where((element) => element.done).length)
+              ],
             );
-          }),
-          Expanded(
-            child: Container(
-              alignment: Alignment.topCenter,
-              padding: EdgeInsets.all(10),
-              child: TextButton(
-                onPressed: () => cubit.clearAllDone(),
-                child: Text('CLEAR ALL DONE',
-                    style: TextStyle(color: Colors.pinkAccent)),
-              ),
-            ),
-          )
-        ],
+          },
+        ),
       ),
     );
   }
