@@ -53,11 +53,15 @@ class _HomeContent extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   itemCount: state.tasks.length,
                   itemBuilder: (context, index) {
-                    return ListItem(
-                        element: state.tasks[index],
-                        onChanged: (done) =>
-                            cubit.onChanged(index, done ?? false),
-                        viewDetail: () => viewDetail(context, index));
+                    return Hero(
+                      tag: '/element.$index',
+                      child:
+                        ListItem(
+                            element: state.tasks[index],
+                            onChanged: (done) =>
+                                cubit.onChanged(index, done ?? false),
+                            viewDetail: () => viewDetail(context, index)),
+                    );
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const Divider(color: Colors.pinkAccent);

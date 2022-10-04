@@ -24,20 +24,26 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     NewTaskScreenRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
+      return CustomPage<dynamic>(
         routeData: routeData,
         child: const NewTaskScreen(),
         maintainState: false,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
       );
     },
     DetailOfTaskRoute.name: (routeData) {
       final args = routeData.argsAs<DetailOfTaskRouteArgs>();
-      return MaterialPageX<dynamic>(
+      return CustomPage<dynamic>(
         routeData: routeData,
         child: DetailOfTask(
           key: args.key,
           index: args.index,
         ),
+        transitionsBuilder: TransitionsBuilders.noTransition,
+        opaque: true,
+        barrierDismissible: false,
       );
     },
   };

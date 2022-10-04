@@ -10,21 +10,23 @@ class ListItem extends StatelessWidget {
 
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-      onTap: viewDetail,
-      child: ListTile(
-        title: Text(
-          element.title,
-          style: _biggerFont,
-        ),
-        subtitle: Text(element.description),
-        trailing: Checkbox(
-          checkColor: Colors.white,
-          activeColor: Colors.pinkAccent,
-          value: element.done,
-          onChanged: onChanged
+  Widget build(BuildContext context) => Material(
+    child: GestureDetector(
+        onTap: viewDetail,
+        child: ListTile(
+          title: Text(
+            element.title,
+            style: _biggerFont,
+          ),
+          subtitle: Text(element.description),
+          trailing: Checkbox(
+            checkColor: Colors.white,
+            activeColor: Colors.pinkAccent,
+            value: element.done,
+            onChanged: onChanged
+          ),
         ),
       ),
-    );
+  );
   }
 

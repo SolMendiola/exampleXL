@@ -12,8 +12,15 @@ part 'app_router.gr.dart';
   replaceInRouteName: 'Page,Route,Screen',
   routes: <AutoRoute>[
     AutoRoute(page: MyHomePage, initial: true),
-    AutoRoute(page: NewTaskScreen, initial: false, maintainState: false),
-    AutoRoute(page: DetailOfTask, initial: false),
+    CustomRoute(
+        page: NewTaskScreen,
+        initial: false,
+        maintainState: false,
+        transitionsBuilder: TransitionsBuilders.slideLeft),
+    CustomRoute(
+        page: DetailOfTask,
+        initial: false,
+        transitionsBuilder: TransitionsBuilders.noTransition),
   ],
 )
 // extend the generated private router
