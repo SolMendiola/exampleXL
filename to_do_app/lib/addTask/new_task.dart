@@ -27,18 +27,23 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('New Task', textAlign: TextAlign.center),
+          title: Text('New Task', textAlign: TextAlign.center),
+          centerTitle: true,
           actions: [
             TextButton(
-                onPressed: () => saveTask(context),
-                child: Text('Save', style: TextStyle(color: Colors.white)))
+              onPressed: () => saveTask(context),
+              child: Text('Save', style: TextStyle(color: Colors.white)),
+            )
           ],
           leading: TextButton(
             onPressed: context.router.pop,
             child: Text('Cancel', style: TextStyle(color: Colors.white)),
           ),
+          leadingWidth: 63,
         ),
+        backgroundColor: Color(0xFFF8F8F8),
         body: Container(
+          color: Colors.white,
           padding: const EdgeInsets.all(20.0),
           child: FormToAddNewTask(
             titleController: titleController,
