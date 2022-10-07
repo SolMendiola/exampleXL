@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 class MyExplicitAnimation extends StatefulWidget {
-  final Widget Function(RiveAnimationController) child;
+  final RiveAnimationController<dynamic>? child;
 
   const MyExplicitAnimation({Key? key, required this.child}) : super(key: key);
 
@@ -13,6 +13,7 @@ class MyExplicitAnimation extends StatefulWidget {
 class _controller extends State<MyExplicitAnimation>
     with SingleTickerProviderStateMixin {
   late RiveAnimationController _controllerRive;
+  bool showAnimation = true;
 
   void _togglePlay() =>
       setState(() => _controllerRive.isActive = !_controllerRive.isActive);
@@ -22,8 +23,13 @@ class _controller extends State<MyExplicitAnimation>
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
-    _controllerRive = SimpleAnimation('idle');
+    super.initState();      print('Here');
+    setState(()=>showAnimation = true);
+    Future.delayed(const Duration(seconds: 5),() {
+      print('Here');
+      setState(()=>showAnimation = false);
+    });
+    _controllerRive = widget.child!;
 
   }
 
@@ -32,15 +38,14 @@ class _controller extends State<MyExplicitAnimation>
     return Center(
       child: Stack(
         children: [
-          widget.child(_controllerRive),
-          if(_controllerRive.isActive)
-          RiveAnimation.asset(
-            'assets/party.riv',
+         // widget.child(_controllerRive),
+          showAnimation ? RiveAnimation.asset(
+            'assets/rive_emoji_pack.riv',
             controllers: [_controllerRive],
             alignment: Alignment.center,
             // Update the play state when the widget's initialized
             onInit: (_) => {},
-          ),
+          ) : Container(),
         ],
       ),
     );

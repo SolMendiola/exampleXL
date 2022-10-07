@@ -61,13 +61,16 @@ class _ListItemState extends State<ListItem> {
                   width: 70,
                   height: 70,
                   child: controller.isActive
-                      ? RiveAnimation.asset(
-                          'assets/emoji.riv',
-                          controllers: [controller],
-                          alignment: Alignment.center,
-                          // Update the play state when the widget's initialized
-                          onInit: (_) => {},
-                        )
+                      ? MyExplicitAnimation(child: controller)
+                  // RiveAnimation.asset(
+                  //         'assets/rive_emoji_pack.riv',
+                  //         controllers: [controller],
+                  //         alignment: Alignment.center,
+                  //         // Update the play state when the widget's initialized
+                  //         onInit: (_) => {
+                  //
+                  //         },
+                  //       )
                       : Container(),
                 ),
               ),
