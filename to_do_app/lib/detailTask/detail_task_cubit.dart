@@ -16,18 +16,13 @@ class DetailTaskCubit extends Cubit<TaskState> {
       : element = RepositoryTask().getTask(index),
         super(TaskState(task: RepositoryTask().getTask(index))) {
     subscription = repo.getTaskStream(index).listen((event) {
-      print(event.toString());
       emit(state.copyWith(task: event));
     });
   }
 
-  CardToDo getTask() {
-    return repo.getTask(index);
-  }
+  CardToDo getTask() => repo.getTask(index);
 
-  void doneButtom() {
-    repo.update(index, !state.task.done);
-  }
+  void doneButtom() => repo.update(index, !state.task.done);
 
   @override
   Future<void> close() {
