@@ -1,64 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 
 class MyExplicitAnimation extends StatefulWidget {
-  final Widget Function(AnimationController) child;
+  final Widget Function(RiveAnimationController) child;
 
   const MyExplicitAnimation({Key? key, required this.child}) : super(key: key);
 
   @override
-  _MyExplicitAnimationState createState() => _MyExplicitAnimationState();
+  _controller createState() => _controller();
 }
 
-class _MyExplicitAnimationState extends State<MyExplicitAnimation>
+class _controller extends State<MyExplicitAnimation>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
+  late RiveAnimationController _controllerRive;
+
+  void _togglePlay() =>
+      setState(() => _controllerRive.isActive = !_controllerRive.isActive);
+
+  bool get isPlaying => _controllerRive.isActive;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
-    _animationController.addStatusListener((animationStatus) {
-      if(animationStatus == AnimationStatus.completed){
-        _animationController.reset();
-      }
-    });
-  }
+    _controllerRive = SimpleAnimation('idle');
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _animationController.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _animationController,
-      builder: (context, child) {
-        return Center(
-            child: Stack(
-          children: [
-            child!,
-            const SizedBox(
-              height: 20,
-            ),
-            if (_animationController.isAnimating)
-              Transform.scale(
-                scale: _animationController.value,
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 100,
-                  width: 100,
-                  child: Image.asset('assets/party.png', height: 100, width: 100),
-                ),
-              ),
-          ],
-        ));
-      },
-      child: widget.child(_animationController),
+    return Center(
+      child: Stack(
+        children: [
+          widget.child(_controllerRive),
+          if(_controllerRive.isActive)
+          RiveAnimation.asset(
+            'assets/party.riv',
+            controllers: [_controllerRive],
+            alignment: Alignment.center,
+            // Update the play state when the widget's initialized
+            onInit: (_) => {},
+          ),
+        ],
+      ),
     );
   }
 }

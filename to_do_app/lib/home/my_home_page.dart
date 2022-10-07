@@ -28,7 +28,6 @@ class MyHomePage extends StatelessWidget {
 class _HomeContent extends StatelessWidget {
   const _HomeContent({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<HomeCubit>();
@@ -46,49 +45,47 @@ class _HomeContent extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: MyExplicitAnimation(
-          child: (animatedController) => BlocBuilder<HomeCubit, HomeState>(
-            builder: (context, state) {
-              return Column(
-                children: [
-                  ListView.separated(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(16.0),
-                    itemCount: state.tasks.length,
-                    itemBuilder: (context, index) {
-                      return Hero(
-                        tag: '/element.$index',
-                        child: ListItem(
-                            element: state.tasks[index],
-                            onChanged: (done)
-                                {cubit.onChanged(index, done ?? false);
-                                  (done == true) ? animatedController.forward() : animatedController.reset();},
-                            viewDetail: () => viewDetail(context, index)),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const Divider(color: Colors.pinkAccent);
-                    },
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.topCenter,
-                      padding: EdgeInsets.all(10),
-                      child: TextButton(
-                        onPressed: () => cubit.clearAllDone(),
-                        child: Text('CLEAR ALL DONE',
-                            style: TextStyle(color: Colors.pinkAccent)),
-                      ),
+        child: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                ListView.separated(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(16.0),
+                  itemCount: state.tasks.length,
+                  itemBuilder: (context, index) {
+                    return Hero(
+                      tag: '/element.$index',
+                      child: ListItem(
+                          element: state.tasks[index],
+                          onChanged: (done) {
+                            cubit.onChanged(index, done ?? false);
+                          },
+                          viewDetail: () => viewDetail(context, index)),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider(color: Colors.pinkAccent);
+                  },
+                ),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    padding: EdgeInsets.all(10),
+                    child: TextButton(
+                      onPressed: () => cubit.clearAllDone(),
+                      child: Text('CLEAR ALL DONE',
+                          style: TextStyle(color: Colors.pinkAccent)),
                     ),
                   ),
-                  ProgressWidget(
-                      totalValue: max(state.tasks.length, 1),
-                      currentValue:
-                          state.tasks.where((element) => element.done).length)
-                ],
-              );
-            },
-          ),
+                ),
+                ProgressWidget(
+                    totalValue: max(state.tasks.length, 1),
+                    currentValue:
+                        state.tasks.where((element) => element.done).length)
+              ],
+            );
+          },
         ),
       ),
     );
