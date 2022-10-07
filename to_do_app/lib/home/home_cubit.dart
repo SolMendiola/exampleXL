@@ -14,11 +14,7 @@ class HomeCubit extends Cubit<HomeState> {
     taskRepository.getTasksStream().listen((event) => emit(state.copyWith(tasks: event)));
   }
 
-  void onChanged(int index, bool done) {
-    taskRepository.update(index, done);
-  }
+  void onChanged(int index, bool done) => taskRepository.update(index, done);
 
-  void clearAllDone(){
-    taskRepository.clearAllDone();
-  }
+  void clearAllDone()=> taskRepository.clearAllDone();
 }

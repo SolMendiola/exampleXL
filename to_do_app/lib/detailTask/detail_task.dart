@@ -48,7 +48,6 @@ class DetailContent extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
-//        height: 262,
         decoration: BoxDecoration(color: Colors.white),
         padding:
         const EdgeInsets.only(left: 20.0, right: 20, top: 20, bottom: 20),

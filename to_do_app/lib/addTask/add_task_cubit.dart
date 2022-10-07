@@ -9,21 +9,17 @@ class AddTaskCubit extends Cubit<TaskState> {
       : super(
             TaskState(task: CardToDo(title: "", description: "", done: false)));
 
-  void changeDescription(String description) {
-    emit(state.copyWith(
+  void changeDescription(String description) => emit(state.copyWith(
       task: state.task.copyWith(
         description: description,
       ),
     ));
-  }
 
-  void changeTitle(String title){
-    emit(state.copyWith(
+  void changeTitle(String title)=> emit(state.copyWith(
       task: state.task.copyWith(
         title: title,
       )
     ));
-  }
 
   void save() => repo.saveTask(state.task);
 }
