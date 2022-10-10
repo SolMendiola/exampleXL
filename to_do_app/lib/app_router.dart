@@ -11,7 +11,7 @@ part 'app_router.gr.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Screen',
   routes: <AutoRoute>[
-    AutoRoute(page: MyHomePage, initial: true, maintainState: false),
+    AutoRoute(page: MyHomePage, initial: true),
     AutoRoute(page: NewTaskScreen, initial: false, maintainState: false),
     AutoRoute(page: DetailOfTask, initial: false),
   ],
