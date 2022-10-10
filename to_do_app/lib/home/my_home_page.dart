@@ -49,24 +49,26 @@ class _HomeContent extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                ListView.separated(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(16.0),
-                  itemCount: state.tasks.length,
-                  itemBuilder: (context, index) {
-                    return Hero(
-                      tag: '/element.$index',
-                      child: ListItem(
-                          element: state.tasks[index],
-                          onChanged: (done) {
-                            cubit.onChanged(index, done ?? false);
-                          },
-                          viewDetail: () => viewDetail(context, index)),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider(color: Colors.pinkAccent);
-                  },
+                Expanded(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: state.tasks.length,
+                    itemBuilder: (context, index) {
+                      return Hero(
+                        tag: '/element.$index',
+                        child: ListItem(
+                            element: state.tasks[index],
+                            onChanged: (done) {
+                              cubit.onChanged(index, done ?? false);
+                            },
+                            viewDetail: () => viewDetail(context, index)),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Divider(color: Colors.pinkAccent);
+                    },
+                  ),
                 ),
                 Expanded(
                   child: Container(

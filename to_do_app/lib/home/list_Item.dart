@@ -29,8 +29,7 @@ class _ListItemState extends State<ListItem> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller = SimpleAnimation('idle')
-      ..isActive = false;
+    controller = SimpleAnimation('idle')..isActive = false;
   }
 
   @override
@@ -62,15 +61,6 @@ class _ListItemState extends State<ListItem> {
                   height: 70,
                   child: controller.isActive
                       ? MyExplicitAnimation(child: controller)
-                  // RiveAnimation.asset(
-                  //         'assets/rive_emoji_pack.riv',
-                  //         controllers: [controller],
-                  //         alignment: Alignment.center,
-                  //         // Update the play state when the widget's initialized
-                  //         onInit: (_) => {
-                  //
-                  //         },
-                  //       )
                       : Container(),
                 ),
               ),

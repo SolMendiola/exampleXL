@@ -1,8 +1,8 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/addTask/add_task_cubit.dart';
-import '../common/string_extension.dart';
 
 class FormToAddNewTask extends StatelessWidget {
   FormToAddNewTask({
@@ -31,7 +31,7 @@ class FormToAddNewTask extends StatelessWidget {
               border: UnderlineInputBorder(),
               hintText: 'Task title',
             ),
-            validator: (value) => (value.isEmpty)
+            validator: (value) => (value.isNullOrEmpty)
                   ? 'Please enter some text'
                   : null,
             controller: titleController,
@@ -47,7 +47,7 @@ class FormToAddNewTask extends StatelessWidget {
               hintText: 'Task description',
               labelStyle: TextStyle(fontSize: 20),
             ),
-            validator: (value) => (value.isEmpty)
+            validator: (value) => (value.isNullOrEmpty)
                   ? 'Please enter some text'
                   : null,
             controller: descriptionController,

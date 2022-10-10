@@ -35,7 +35,7 @@ dependencies:
   flutter:
     sdk: flutter
   rive: 0.9.0
-
+  dartx: any
 
 
   # The following adds the Cupertino Icons font to your application.

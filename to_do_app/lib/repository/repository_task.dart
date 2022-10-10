@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:dartx/dartx.dart';
 import '../domain/card_to_do.dart';
 
 class RepositoryTask {
@@ -20,8 +20,9 @@ class RepositoryTask {
   }
 
   void saveTask(CardToDo taskToAdd) {
-    final elements = _elements.toList();
+    var elements = _elements.toList();
     elements.add(taskToAdd);
+    elements = elements.sortedBy((element) => element.title);
     _streamController.add(elements);
   }
 
@@ -31,13 +32,14 @@ class RepositoryTask {
     _streamController.add(elements);
   }
 
-  Stream<List<CardToDo>> getTasksStream() => _streamController.stream;
+  Stream<List<CardToDo>> getTasksStream() => _streamController.stream
+      .map((list) => list.sortedBy((element) => element.title));
 
   Stream<CardToDo> getTaskStream(int index) => _streamController.stream
       .map((list) => list[index])
       .distinct((old, newe) => old.done == newe.done);
 
-  List<CardToDo> getTasks() => _elements;
+  List<CardToDo> getTasks() => _elements.sortedBy((element) => element.title);
 
   CardToDo getTask(int index) => _elements[index];
 
